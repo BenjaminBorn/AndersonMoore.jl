@@ -17,7 +17,7 @@ function reducedForm(qq::Array{Float64,2}, qrows::Int64, qcols::Int64, bcols::In
         bb = qtmp[1 : neq, 1 : bcols]
     else  # rescale by dividing row by maximal qr element
         # 'inverse condition number small, rescaling '
-        themax = maximum(abs.(qtmp[:, right]), 2)
+        themax = maximum(abs.(qtmp[:, right]), dims = 2)
         oneover = diagm(1 ./ themax[:, 1])
         
         nonsing = ( 1 / cond( oneover*qtmp[:, right], 1) ) > condn
